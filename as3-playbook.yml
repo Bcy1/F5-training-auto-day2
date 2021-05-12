@@ -1,0 +1,26 @@
+---
+
+- name: Deploy AS3 declaration
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars_files:
+    - creds/bigip_creds.yml
+
+  tasks:
+  - name: Update F5
+    uri:
+      url: https://18.168.126.166/mgmt/shared/appsvcs/declare
+#      user: admin
+#      password: Coda1812riseyuck
+      user: "{{ bigip_user }}"
+      password: "{{ bigip_pass }}"
+      method: POST
+      body: "{{ lookup('file','f5.json') }}"
+      force_basic-auth: yes
+      status_code: 200
+      body_format: json
+      validate_certs: no
+
+...
