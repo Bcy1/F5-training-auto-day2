@@ -1,0 +1,27 @@
+---
+
+
+#vars:
+
+#vars_files:
+
+- name: Deploy AS3 declaration
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Update F5
+    uri:
+      url: https://18.168.126.166/mgmt/shared/appsvcs/declare
+      user: admin
+      password: Coda1812riseyuck
+      method: POST
+      body: "{{ lookup('file','f5.json') }}"
+      force_basic_auth: yes
+      status_code: 200
+      body_format: json
+      validate_certs: no
+
+
+...
